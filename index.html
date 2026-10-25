@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>حاسبة التقاعد والمستحقات العسكرية للأفراد</title>
+<meta name="description" content="حاسبة التقاعد والمستحقات العسكرية للأفراد: سلم الرواتب، المعاش، المكافآت، البدلات، وتحليل الفجوة المالية.">
+<meta name="theme-color" content="#1f6b3a">
+<meta name="color-scheme" content="light dark">
+<meta name="author" content="ابو ساهر الشافعي">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_SA">
+<meta property="og:title" content="حاسبة التقاعد والمستحقات العسكرية للأفراد">
+<meta property="og:description" content="احسب معاشك ومكافآتك وفجوة الدخل بعد التقاعد.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%AA%96%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f5f1;--card:#fff;--tx:#1b2a1f;--mu:#5f6f64;--pr:#1f6b3a;--pr2:#e4f1e8;--bd:#d9e0d9;--wr:#b4540a;--bar1:#1f6b3a;--bar2:#c28a1c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101712;--card:#18221b;--tx:#e8efe9;--mu:#9aab9f;--pr:#4fbf79;--pr2:#1e3326;--bd:#2c3b30;--wr:#f0a35e;--bar1:#4fbf79;--bar2:#e0b04a}}
+:root[data-theme="dark"]{--bg:#101712;--card:#18221b;--tx:#e8efe9;--mu:#9aab9f;--pr:#4fbf79;--pr2:#1e3326;--bd:#2c3b30;--wr:#f0a35e;--bar1:#4fbf79;--bar2:#e0b04a}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Tajawal,Tahoma,sans-serif;line-height:1.6}
+header{background:var(--pr);color:#fff;padding:22px 16px;text-align:center;position:relative}
+:root[data-theme="dark"] header{color:#0c1a10}
+header h1{margin:0;font-size:1.5rem;font-weight:800}header p{margin:4px 0 0;opacity:.85;font-size:.9rem}
+#theme{position:absolute;left:12px;top:12px;background:rgba(255,255,255,.2);border:0;color:inherit;border-radius:10px;padding:6px 12px;font:inherit;cursor:pointer}
+main{max-width:1000px;margin:0 auto;padding:16px;display:grid;gap:14px;grid-template-columns:1fr 1fr}
+@media(max-width:760px){main{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px}
+.full{grid-column:1/-1}
+h2{margin:0 0 12px;font-size:1.05rem;color:var(--pr)}
+label{display:block;font-size:.85rem;color:var(--mu);margin:8px 0 3px}
+input,select{width:100%;padding:9px 10px;border:1px solid var(--bd);border-radius:9px;background:var(--bg);color:var(--tx);font:inherit}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chk{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:.92rem}.chk input{width:auto}
+.chk span{margin-right:auto;color:var(--mu);font-size:.85rem}
+.res{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--bd)}
+.res b{color:var(--pr)}.tot{background:var(--pr2);border-radius:10px;padding:10px 12px;margin-top:8px;border:0;font-weight:800}
+.note{font-size:.8rem;color:var(--mu);margin-top:8px}
+.badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:.85rem;font-weight:700;background:var(--pr2);color:var(--pr)}
+.badge.no{background:#fbe9dc;color:var(--wr)}
+.bar{height:26px;border-radius:8px;margin:4px 0 12px;color:#fff;font-size:.8rem;padding:2px 10px;white-space:nowrap}
+.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+button.p{background:var(--pr);color:#fff;border:0;padding:11px 26px;border-radius:10px;font:inherit;font-weight:700;cursor:pointer}
+:root[data-theme="dark"] button.p{color:#0c1a10}
+html{scroll-behavior:smooth}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:30}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--card);border-bottom:1px solid var(--bd);display:flex;gap:6px;overflow-x:auto;padding:8px 12px;scrollbar-width:none;justify-content:center}
+nav::-webkit-scrollbar{display:none}
+nav a{flex:none;padding:8px 14px;border-radius:20px;color:var(--mu);text-decoration:none;font-size:.9rem;font-weight:500;min-height:40px;display:flex;align-items:center}
+nav a:hover{background:var(--pr2)}nav a.on{background:var(--pr);color:#fff}
+:root[data-theme="dark"] nav a.on{color:#0c1a10}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) nav a.on{color:#0c1a10}}
+section{scroll-margin-top:calc(64px + env(safe-area-inset-top,0px))}
+@media(max-width:760px){nav{justify-content:flex-start}}
+footer{text-align:center;color:var(--mu);padding:16px;font-size:.9rem}
+@media print{#theme,.btns,nav{display:none}:root{--bg:#fff;--card:#fff;--tx:#000;--mu:#444;--bd:#bbb}header{background:#fff!important;color:#000!important;border-bottom:2px solid #000}.card{break-inside:avoid}.bar{-webkit-print-color-adjust:exact;print-color-adjust:exact}main{grid-template-columns:1fr 1fr}}
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f5f1;--card:#fff;--tx:#1b2a1f;--mu:#5f6f64;--pr:#1f6b3a;--pr2:#e4f1e8;--bd:#d9e0d9;--wr:#b4540a;--bar1:#1f6b3a;--bar2:#c28a1c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101712;--card:#18221b;--tx:#e8efe9;--mu:#9aab9f;--pr:#4fbf79;--pr2:#1e3326;--bd:#2c3b30;--wr:#f0a35e;--bar1:#4fbf79;--bar2:#e0b04a}}
+:root[data-theme="dark"]{--bg:#101712;--card:#18221b;--tx:#e8efe9;--mu:#9aab9f;--pr:#4fbf79;--pr2:#1e3326;--bd:#2c3b30;--wr:#f0a35e;--bar1:#4fbf79;--bar2:#e0b04a}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Tajawal,Tahoma,sans-serif;line-height:1.6}
+header{background:var(--pr);color:#fff;padding:22px 16px;text-align:center;position:relative}
+:root[data-theme="dark"] header{color:#0c1a10}
+header h1{margin:0;font-size:1.5rem;font-weight:800}header p{margin:4px 0 0;opacity:.85;font-size:.9rem}
+#theme{position:absolute;left:12px;top:12px;background:rgba(255,255,255,.2);border:0;color:inherit;border-radius:10px;padding:6px 12px;font:inherit;cursor:pointer}
+main{max-width:1000px;margin:0 auto;padding:16px;display:grid;gap:14px;grid-template-columns:1fr 1fr}
+@media(max-width:760px){main{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px}
+.full{grid-column:1/-1}
+h2{margin:0 0 12px;font-size:1.05rem;color:var(--pr)}
+label{display:block;font-size:.85rem;color:var(--mu);margin:8px 0 3px}
+input,select{width:100%;padding:9px 10px;border:1px solid var(--bd);border-radius:9px;background:var(--bg);color:var(--tx);font:inherit}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chk{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:.92rem}.chk input{width:auto}
+.chk span{margin-right:auto;color:var(--mu);font-size:.85rem}
+.res{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--bd)}
+.res b{color:var(--pr)}.tot{background:var(--pr2);border-radius:10px;padding:10px 12px;margin-top:8px;border:0;font-weight:800}
+.note{font-size:.8rem;color:var(--mu);margin-top:8px}
+.badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:.85rem;font-weight:700;background:var(--pr2);color:var(--pr)}
+.badge.no{background:#fbe9dc;color:var(--wr)}
+.bar{height:26px;border-radius:8px;margin:4px 0 12px;color:#fff;font-size:.8rem;padding:2px 10px;white-space:nowrap}
+.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+button.p{background:var(--pr);color:#fff;border:0;padding:11px 26px;border-radius:10px;font:inherit;font-weight:700;cursor:pointer}
+:root[data-theme="dark"] button.p{color:#0c1a10}
+html{scroll-behavior:smooth}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:30}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--card);border-bottom:1px solid var(--bd);display:flex;gap:6px;overflow-x:auto;padding:8px 12px;scrollbar-width:none;justify-content:center}
+nav::-webkit-scrollbar{display:none}
+nav a{flex:none;padding:8px 14px;border-radius:20px;color:var(--mu);text-decoration:none;font-size:.9rem;font-weight:500;min-height:40px;display:flex;align-items:center}
+nav a:hover{background:var(--pr2)}nav a.on{background:var(--pr);color:#fff}
+:root[data-theme="dark"] nav a.on{color:#0c1a10}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) nav a.on{color:#0c1a10}}
+section{scroll-margin-top:calc(64px + env(safe-area-inset-top,0px))}
+@media(max-width:760px){nav{justify-content:flex-start}}
+footer{text-align:center;color:var(--mu);padding:16px;font-size:.9rem}
+@media print{#theme,.btns,nav{display:none}:root{--bg:#fff;--card:#fff;--tx:#000;--mu:#444;--bd:#bbb}header{background:#fff!important;color:#000!important;border-bottom:2px solid #000}.card{break-inside:avoid}.bar{-webkit-print-color-adjust:exact;print-color-adjust:exact}main{grid-template-columns:1fr 1fr}}
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f5f1;--card:#fff;--tx:#1b2a1f;--mu:#5f6f64;--pr:#1f6b3a;--pr2:#e4f1e8;--bd:#d9e0d9;--wr:#b4540a;--bar1:#1f6b3a;--bar2:#c28a1c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101712;--card:#18221b;--tx:#e8efe9;--mu:#9aab9f;--pr:#4fbf79;--pr2:#1e3326;--bd:#2c3b30;--wr:#f0a35e;--bar1:#4fbf79;--bar2:#e0b04a}}
+:root[data-theme="dark"]{--bg:#101712;--card:#18221b;--tx:#e8efe9;--mu:#9aab9f;--pr:#4fbf79;--pr2:#1e3326;--bd:#2c3b30;--wr:#f0a35e;--bar1:#4fbf79;--bar2:#e0b04a}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Tajawal,Tahoma,sans-serif;line-height:1.6}
+header{background:var(--pr);color:#fff;padding:22px 16px;text-align:center;position:relative}
+:root[data-theme="dark"] header{color:#0c1a10}
+header h1{margin:0;font-size:1.5rem;font-weight:800}header p{margin:4px 0 0;opacity:.85;font-size:.9rem}
+#theme{position:absolute;left:12px;top:12px;background:rgba(255,255,255,.2);border:0;color:inherit;border-radius:10px;padding:6px 12px;font:inherit;cursor:pointer}
+main{max-width:1000px;margin:0 auto;padding:16px;display:grid;gap:14px;grid-template-columns:1fr 1fr}
+@media(max-width:760px){main{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px}
+.full{grid-column:1/-1}
+h2{margin:0 0 12px;font-size:1.05rem;color:var(--pr)}
+label{display:block;font-size:.85rem;color:var(--mu);margin:8px 0 3px}
+input,select{width:100%;padding:9px 10px;border:1px solid var(--bd);border-radius:9px;background:var(--bg);color:var(--tx);font:inherit}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chk{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:.92rem}.chk input{width:auto}
+.chk span{margin-right:auto;color:var(--mu);font-size:.85rem}
+.res{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--bd)}
+.res b{color:var(--pr)}.tot{background:var(--pr2);border-radius:10px;padding:10px 12px;margin-top:8px;border:0;font-weight:800}
+.note{font-size:.8rem;color:var(--mu);margin-top:8px}
+.badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:.85rem;font-weight:700;background:var(--pr2);color:var(--pr)}
+.badge.no{background:#fbe9dc;color:var(--wr)}
+.bar{height:26px;border-radius:8px;margin:4px 0 12px;color:#fff;font-size:.8rem;padding:2px 10px;white-space:nowrap}
+.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+button.p{background:var(--pr);color:#fff;border:0;padding:11px 26px;border-radius:10px;font:inherit;font-weight:700;cursor:pointer}
+:root[data-theme="dark"] button.p{color:#0c1a10}
+html{scroll-behavior:smooth}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:30}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--card);border-bottom:1px solid var(--bd);display:flex;gap:6px;overflow-x:auto;padding:8px 12px;scrollbar-width:none;justify-content:center}
+nav::-webkit-scrollbar{display:none}
+nav a{flex:none;padding:8px 14px;border-radius:20px;color:var(--mu);text-decoration:none;font-size:.9rem;font-weight:500;min-height:40px;display:flex;align-items:center}
+nav a:hover{background:var(--pr2)}nav a.on{background:var(--pr);color:#fff}
+:root[data-theme="dark"] nav a.on{color:#0c1a10}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) nav a.on{color:#0c1a10}}
+section{scroll-margin-top:calc(64px + env(safe-area-inset-top,0px))}
+@media(max-width:760px){nav{justify-content:flex-start}}
+footer{text-align:center;color:var(--mu);padding:16px;font-size:.9rem}
+@media print{#theme,.btns,nav{display:none}:root{--bg:#fff;--card:#fff;--tx:#000;--mu:#444;--bd:#bbb}header{background:#fff!important;color:#000!important;border-bottom:2px solid #000}.card{break-inside:avoid}.bar{-webkit-print-color-adjust:exact;print-color-adjust:exact}main{grid-template-columns:1fr 1fr}}
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f5f1;--card:#fff;--tx:#1b2a1f;--mu:#5f6f64;--pr:#1f6b3a;--pr2:#e4f1e8;--bd:#d9e0d9;--wr:#b4540a;--bar1:#1f6b3a;--bar2:#c28a1c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101712;--card:#18221b;--tx:#e8efe9;--mu:#9aab9f;--pr:#4fbf79;--pr2:#1e3326;--bd:#2c3b30;--wr:#f0a35e;--bar1:#4fbf79;--bar2:#e0b04a}}
+:root[data-theme="dark"]{--bg:#101712;--card:#18221b;--tx:#e8efe9;--mu:#9aab9f;--pr:#4fbf79;--pr2:#1e3326;--bd:#2c3b30;--wr:#f0a35e;--bar1:#4fbf79;--bar2:#e0b04a}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Tajawal,Tahoma,sans-serif;line-height:1.6}
+header{background:var(--pr);color:#fff;padding:22px 16px;text-align:center;position:relative}
+:root[data-theme="dark"] header{color:#0c1a10}
+header h1{margin:0;font-size:1.5rem;font-weight:800}header p{margin:4px 0 0;opacity:.85;font-size:.9rem}
+#theme{position:absolute;left:12px;top:12px;background:rgba(255,255,255,.2);border:0;color:inherit;border-radius:10px;padding:6px 12px;font:inherit;cursor:pointer}
+main{max-width:1000px;margin:0 auto;padding:16px;display:grid;gap:14px;grid-template-columns:1fr 1fr}
+@media(max-width:760px){main{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px}
+.full{grid-column:1/-1}
+h2{margin:0 0 12px;font-size:1.05rem;color:var(--pr)}
+label{display:block;font-size:.85rem;color:var(--mu);margin:8px 0 3px}
+input,select{width:100%;padding:9px 10px;border:1px solid var(--bd);border-radius:9px;background:var(--bg);color:var(--tx);font:inherit}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chk{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:.92rem}.chk input{width:auto}
+.chk span{margin-right:auto;color:var(--mu);font-size:.85rem}
+.res{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--bd)}
+.res b{color:var(--pr)}.tot{background:var(--pr2);border-radius:10px;padding:10px 12px;margin-top:8px;border:0;font-weight:800}
+.note{font-size:.8rem;color:var(--mu);margin-top:8px}
+.badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:.85rem;font-weight:700;background:var(--pr2);color:var(--pr)}
+.badge.no{background:#fbe9dc;color:var(--wr)}
+.bar{height:26px;border-radius:8px;margin:4px 0 12px;color:#fff;font-size:.8rem;padding:2px 10px;white-space:nowrap}
+.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+button.p{background:var(--pr);color:#fff;border:0;padding:11px 26px;border-radius:10px;font:inherit;font-weight:700;cursor:pointer}
+:root[data-theme="dark"] button.p{color:#0c1a10}
+html{scroll-behavior:smooth}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:30}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--card);border-bottom:1px solid var(--bd);display:flex;gap:6px;overflow-x:auto;padding:8px 12px;scrollbar-width:none;justify-content:center}
+nav::-webkit-scrollbar{display:none}
+nav a{flex:none;padding:8px 14px;border-radius:20px;color:var(--mu);text-decoration:none;font-size:.9rem;font-weight:500;min-height:40px;display:flex;align-items:center}
+nav a:hover{background:var(--pr2)}nav a.on{background:var(--pr);color:#fff}
+:root[data-theme="dark"] nav a.on{color:#0c1a10}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) nav a.on{color:#0c1a10}}
+section{scroll-margin-top:calc(64px + env(safe-area-inset-top,0px))}
+@media(max-width:760px){nav{justify-content:flex-start}}
+footer{text-align:center;color:var(--mu);padding:16px;font-size:.9rem}
+@media print{#theme,.btns,nav{display:none}:root{--bg:#fff;--card:#fff;--tx:#000;--mu:#444;--bd:#bbb}header{background:#fff!important;color:#000!important;border-bottom:2px solid #000}.card{break-inside:avoid}.bar{-webkit-print-color-adjust:exact;print-color-adjust:exact}main{grid-template-columns:1fr 1fr}}
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f5f1;--card:#fff;--tx:#1b2a1f;--mu:#5f6f64;--pr:#1f6b3a;--pr2:#e4f1e8;--bd:#d9e0d9;--wr:#b4540a;--bar1:#1f6b3a;--bar2:#c28a1c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101712;--card:#18221b;--tx:#e8efe9;--mu:#9aab9f;--pr:#4fbf79;--pr2:#1e3326;--bd:#2c3b30;--wr:#f0a35e;--bar1:#4fbf79;--bar2:#e0b04a}}
+:root[data-theme="dark"]{--bg:#101712;--card:#18221b;--tx:#e8efe9;--mu:#9aab9f;--pr:#4fbf79;--pr2:#1e3326;--bd:#2c3b30;--wr:#f0a35e;--bar1:#4fbf79;--bar2:#e0b04a}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Tajawal,Tahoma,sans-serif;line-height:1.6}
+header{background:var(--pr);color:#fff;padding:22px 16px;text-align:center;position:relative}
+:root[data-theme="dark"] header{color:#0c1a10}
+header h1{margin:0;font-size:1.5rem;font-weight:800}header p{margin:4px 0 0;opacity:.85;font-size:.9rem}
+#theme{position:absolute;left:12px;top:12px;background:rgba(255,255,255,.2);border:0;color:inherit;border-radius:10px;padding:6px 12px;font:inherit;cursor:pointer}
+main{max-width:1000px;margin:0 auto;padding:16px;display:grid;gap:14px;grid-template-columns:1fr 1fr}
+@media(max-width:760px){main{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px}
+.full{grid-column:1/-1}
+h2{margin:0 0 12px;font-size:1.05rem;color:var(--pr)}
+label{display:block;font-size:.85rem;color:var(--mu);margin:8px 0 3px}
+input,select{width:100%;padding:9px 10px;border:1px solid var(--bd);border-radius:9px;background:var(--bg);color:var(--tx);font:inherit}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chk{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:.92rem}.chk input{width:auto}
+.chk span{margin-right:auto;color:var(--mu);font-size:.85rem}
+.res{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--bd)}
+.res b{color:var(--pr)}.tot{background:var(--pr2);border-radius:10px;padding:10px 12px;margin-top:8px;border:0;font-weight:800}
+.note{font-size:.8rem;color:var(--mu);margin-top:8px}
+.badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:.85rem;font-weight:700;background:var(--pr2);color:var(--pr)}
+.badge.no{background:#fbe9dc;color:var(--wr)}
+.bar{height:26px;border-radius:8px;margin:4px 0 12px;color:#fff;font-size:.8rem;padding:2px 10px;white-space:nowrap}
+.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+button.p{background:var(--pr);color:#fff;border:0;padding:11px 26px;border-radius:10px;font:inherit;font-weight:700;cursor:pointer}
+:root[data-theme="dark"] button.p{color:#0c1a10}
+html{scroll-behavior:smooth}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:30}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--card);border-bottom:1px solid var(--bd);display:flex;gap:6px;overflow-x:auto;padding:8px 12px;scrollbar-width:none;justify-content:center}
+nav::-webkit-scrollbar{display:none}
+nav a{flex:none;padding:8px 14px;border-radius:20px;color:var(--mu);text-decoration:none;font-size:.9rem;font-weight:500;min-height:40px;display:flex;align-items:center}
+nav a:hover{background:var(--pr2)}nav a.on{background:var(--pr);color:#fff}
+:root[data-theme="dark"] nav a.on{color:#0c1a10}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) nav a.on{color:#0c1a10}}
+section{scroll-margin-top:calc(64px + env(safe-area-inset-top,0px))}
+@media(max-width:760px){nav{justify-content:flex-start}}
+footer{text-align:center;color:var(--mu);padding:16px;font-size:.9rem}
+@media print{#theme,.btns,nav{display:none}:root{--bg:#fff;--card:#fff;--tx:#000;--mu:#444;--bd:#bbb}header{background:#fff!important;color:#000!important;border-bottom:2px solid #000}.card{break-inside:avoid}.bar{-webkit-print-color-adjust:exact;print-color-adjust:exact}main{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header><button id="theme" type="button">🌙 / ☀️</button><h1>حاسبة التقاعد والمستحقات العسكرية للأفراد</h1><p>سلم الرواتب • المعاش • المكافآت • تحليل الفجوة المالية</p></header>
+<nav aria-label="التنقل بين الأقسام"><a href="#s1">الراتب</a><a href="#s2">مدة الخدمة</a><a href="#s3">سبب الإنهاء</a><a href="#s4">البدلات</a><a href="#s8">التعويضات</a><a href="#s5">المعاش</a><a href="#s6">المستحقات</a><a href="#s7">الفجوة المالية</a></nav>
+<noscript><p style="text-align:center;padding:20px">يلزم تفعيل JavaScript لتشغيل الحاسبة.</p></noscript>
+<main>
+<section class="card" id="s1"><h2>١) الرتبة والراتب</h2>
+<div class="row"><div><label>الرتبة</label><select id="rank"></select></div><div><label>الدرجة (١–١٥)</label><select id="grade"></select></div></div>
+<label>آخر راتب أساسي (ريال) — قابل للتعديل</label><input id="base" type="number" min="0" step="10">
+<div class="note">السلم وفق جدول رواتب الأفراد بعد إضافة بدل غلاء المعيشة (١٥٪) — الأمر الملكي (أ/٢٣) وتاريخ ٢٠/٣/١٤٣٢هـ. يمكنك تعديل الراتب يدوياً.</div></section>
+
+<section class="card" id="s2"><h2>٢) مدة الخدمة</h2>
+<label>تاريخ مباشرة الخدمة (هجري)</label><div style="display:grid;grid-template-columns:1fr 1.7fr 1.2fr;gap:6px"><select id="d1d"></select><select id="d1m"></select><select id="d1y"></select></div><label>تاريخ نهاية الخدمة (هجري)</label><div style="display:grid;grid-template-columns:1fr 1.7fr 1.2fr;gap:6px"><select id="d2d"></select><select id="d2m"></select><select id="d2y"></select></div>
+<div class="row"><div><label>خدمة إضافية (سنوات)</label><input id="ex" type="number" min="0" value="0"></div><div><label>خدمة إضافية (أشهر)</label><input id="exm" type="number" min="0" max="11" value="0"></div></div>
+<div class="note">الخدمة الإضافية: العمليات الحربية أو المناطق النائية المحتسبة نظاماً.</div>
+<div class="res tot"><span>إجمالي مدة الخدمة</span><b id="svc"></b></div></section>
+
+<section class="card" id="s3"><h2>٣) سبب إنهاء الخدمة</h2>
+<select id="case">
+<option value="age">التقاعد لبلوغ السن النظامي (١٥ سنة فأكثر)</option>
+<option value="early">التقاعد المبكر بطلب الفرد (١٨ سنة فأكثر)</option>
+<option value="war">عجز/استشهاد بسبب العمليات الحربية ومكافحة الإرهاب</option>
+<option value="health">عجز صحي بسبب الخدمة</option></select>
+<label>نسبة المعاش لكل سنة خدمة %</label><input id="rate" type="number" step="0.1" value="2.5">
+<div class="note">المعاش = الراتب الأساسي × سنوات الخدمة × النسبة، بحد أقصى ١٠٠٪.</div></section>
+
+<section class="card" id="s4"><h2>٤) البدلات أثناء الخدمة</h2>
+<div id="al"></div>
+<div class="row"><div><label>بدل مخصص: الاسم</label><input id="cn" placeholder="اختياري"></div><div><label>المبلغ (ريال)</label><input id="ca" type="number" min="0" value="0"></div></div>
+<div class="note">فعّل البدل المطلوب وعدّل مبلغه، وحسم التقاعد ٩٪ مفعّل افتراضياً.</div></section>
+
+<section class="card" id="s8"><h2>٥) مكافأة نهاية الخدمة والتعويضات</h2>
+<label>الراتب الشامل للتعويضات (ريال) — اتركه فارغاً لاعتماد الأساسي + البدلات</label><input id="ct" type="number" min="0" placeholder="تلقائي">
+<div class="row"><div><label>رصيد الإجازات (يوم، حد أقصى 180)</label><input id="lv" type="number" min="0" max="180" value="180"></div><div><label>التأهب (يوم)</label><input id="sb" type="number" min="0" value="120"></div></div>
+<div class="row"><div><label>مكافأة نهاية الخدمة (عدد الرواتب)</label><input id="bm" type="number" min="0" step="0.5" value="6"></div><div><label>تسليم العهدة (عدد الرواتب)</label><input id="hm" type="number" min="0" step="0.5" value="2"></div></div></section>
+<section class="card" id="s5"><h2>نتيجة الاستحقاق</h2><div id="status"></div><div id="r1"></div></section>
+<section class="card" id="s6"><h2>المستحقات المقطوعة (دفعة واحدة)</h2><div id="r2"></div></section>
+
+<section class="card full" id="s7"><h2>تحليل الفجوة المالية</h2><div id="gap"></div></section>
+<div class="btns full"><button class="p" type="button" onclick="window.print()">🖨️ طباعة التقرير</button></div>
+</main>
+<footer>اعداد وتصميم : ابو ساهر الشافعي<br><small>حاسبة استرشادية، والمرجع النهائي هو الأنظمة والتعاميم الرسمية.</small></footer>
+<script>
+const RANKS=[["جندي",3220,130],["جندي أول",3395,145],["عريف",3765,175],["وكيل رقيب",4455,210],["رقيب",5260,250],["رقيب أول",6180,300],["رئيس رقباء",7215,360]];
+const AL=[["بدل النقل (500 حتى رقيب، 700 لرقيب أول فأعلى)",500,"f"],["بدل المناطق النائية (٪ من الأساسي)",11,"p"],["بدل يومية الميدان",450,"f"],["بدل إعاشة",500,"f"],["بدل إعاشة إضافية",500,"f"],["مكافأة شهادة ابتدائي",200,"f"],["مكافأة شهادة متوسط",250,"f"],["مكافأة شهادة ثانوي",300,"f"],["مكافأة الحاسب الآلي",0,"f"],["مكافأة موظفي المساجد",0,"f"],["علاوة ضرر وعدوى",0,"f"],["علاوة خطر",600,"f"],["علاوة المناطق الحدودية النائية",0,"f"],["علاوة الفدائيين",0,"f"],["علاوة الاستخبارات والمباحث",0,"f"],["علاوة أمن (٪ من آخر راتب أساسي)",25,"p"],["علاوة مكافحة الإرهاب (٪ من الأساسي)",25,"p"],["علاوة فنية",950,"f"],["علاوة تخصص",0,"f"],["بدلات أخرى",0,"f"],["حسم المؤسسة العامة للتقاعد (٪ من الأساسي)",9,"d"]];
+const $=i=>document.getElementById(i),f=n=>Math.round(n).toLocaleString("ar-SA-u-nu-latn")+" ر.س";
+$("rank").innerHTML=RANKS.map((r,i)=>`<option value="${i}">${r[0]}</option>`).join("");
+$("grade").innerHTML=Array.from({length:15},(_,i)=>`<option value="${i+1}">${i+1}</option>`).join("");
+$("al").innerHTML=AL.map((a,i)=>`<div class="chk"><input type="checkbox" class="ac" data-i="${i}"${a[2]==="d"?" checked":""}><span style="margin:0;flex:1;color:inherit">${a[0]}</span><input type="number" class="av" data-i="${i}" min="0" value="${a[1]}" style="width:90px"><span style="margin:0">${a[2]==="f"?"ر.س":"٪"}</span></div>`).join("");
+const HM=["محرم","صفر","ربيع الأول","ربيع الآخر","جمادى الأولى","جمادى الآخرة","رجب","شعبان","رمضان","شوال","ذو القعدة","ذو الحجة"];
+const hd=p=>[+$(p+"y").value,+$(p+"m").value,+$(p+"d").value];
+["d1","d2"].forEach(p=>{$(p+"d").innerHTML=Array.from({length:30},(_,i)=>`<option>${i+1}</option>`).join("");$(p+"m").innerHTML=HM.map((n,i)=>`<option value="${i+1}">${n}</option>`).join("");$(p+"y").innerHTML=Array.from({length:111},(_,i)=>`<option>${1380+i}</option>`).join("")});
+const pt={};try{new Intl.DateTimeFormat("en-u-ca-islamic-umalqura",{day:"numeric",month:"numeric",year:"numeric"}).formatToParts(new Date()).forEach(x=>pt[x.type]=parseInt(x.value))}catch(e){}
+$("d1y").value=1429;$("d1m").value=1;$("d1d").value=1;
+$("d2y").value=pt.year||pt.relatedYear||1448;$("d2m").value=pt.month||1;$("d2d").value=Math.min(30,pt.day||1);
+function setBase(){const r=RANKS[$("rank").value];const tv=document.querySelector('.av[data-i="0"]');if(tv)tv.value=+$("rank").value>=5?700:500;$("base").value=r[1]+($("grade").value-1)*r[2];calc()}
+function calc(){
+const base=+$("base").value||0,a=hd("d1"),b=hd("d2");
+let m=(b[0]-a[0])*12+b[1]-a[1]-(b[2]<a[2]?1:0);
+m=Math.max(0,m)+(+$("ex").value||0)*12+(+$("exm").value||0);
+const y=m/12,cs=$("case").value,rate=(+$("rate").value||0)/100;
+$("svc").textContent=`${Math.floor(m/12)} سنة و ${m%12} شهر`;
+const minY={age:15,early:18,war:0,health:0}[cs],elig=y>=minY;
+let pct=Math.min(1,y*rate),pen=0,bonusM=0,lump=0;
+if(cs==="war"){pct=1;pen=base;bonusM=6}
+else if(cs==="health"){pct=Math.max(.7,pct);pen=base*pct;bonusM=4}
+else if(elig){pen=base*pct;bonusM=4}
+else{const Y=Math.floor(y),fr=y-Y;let mo=0;const seg=[[5,1.5],[5,2],[99,3]];let left=y;for(const[c,k]of seg){const u=Math.min(left,c);mo+=u*k;left-=u;if(left<=0)break}lump=base*mo}
+let al=+$("ca").value||0,ded=0;document.querySelectorAll(".ac:checked").forEach(c=>{const i=c.dataset.i,v=+document.querySelector(`.av[data-i="${i}"]`).value||0,t=AL[i][2];if(t==="f")al+=v;else if(t==="p")al+=base*v/100;else ded+=base*v/100});
+const S=+$("ct").value>0?+$("ct").value:base+al,days=Math.min(180,+$("lv").value||0),stand=+$("sb").value||0,bm=+$("bm").value||0,hm=+$("hm").value||0;
+const bonus=pen>0?S*bm:0,leave=S/30*days,sdays=S/30*stand,hand=S*hm;
+const hasPen=pen>0;
+$("status").innerHTML=hasPen?`<span class="badge">مستحق للمعاش التقاعدي</span>`:`<span class="badge no">غير مستحق للمعاش — تسوية دفعة واحدة</span>`;
+$("r1").innerHTML=`<div class="res"><span>الراتب الأساسي</span><b>${f(base)}</b></div><div class="res"><span>نسبة المعاش</span><b>${hasPen?(pct*100).toFixed(1)+"٪":"—"}</b></div><div class="res tot"><span>المعاش الشهري</span><b>${f(pen)}</b></div>`+(!elig&&!["war","health"].includes(cs)?`<div class="note">الحد الأدنى للمعاش في هذه الحالة ${minY} سنة خدمة.</div>`:"");
+const tot=bonus+leave+sdays+hand+lump;
+$("r2").innerHTML=`<div class="res"><span>الراتب الشامل المعتمد للتعويضات</span><b>${f(S)}</b></div><div class="res"><span>مكافأة نهاية الخدمة (${bm} رواتب)</span><b>${f(bonus)}</b></div><div class="res"><span>تسوية الخدمة (عدم استحقاق المعاش)</span><b>${f(lump)}</b></div><div class="res"><span>بدل الإجازات (${days} يوم)</span><b>${f(leave)}</b></div><div class="res"><span>بدل التأهب (${stand} يوم)</span><b>${f(sdays)}</b></div><div class="res"><span>تسليم العهدة (${hm} رواتب)</span><b>${f(hand)}</b></div><div class="res tot"><span>إجمالي الدفعة الواحدة</span><b>${f(tot)}</b></div>`;
+
+const gross=base+al,net=gross-ded,rn=pen,diff=net-rn,dp=net?diff/net*100:0;
+const w1=100,w2=net?Math.max(2,rn/net*100):0;
+$("gap").innerHTML=`<div class="res"><span>الراتب الأساسي + البدلات</span><b>${f(gross)}</b></div><div class="res"><span>الاستقطاعات (حسم المؤسسة العامة للتقاعد)</span><b>− ${f(ded)}</b></div>
+<div style="margin-top:12px">صافي الراتب أثناء الخدمة: <b>${f(net)}</b></div><div class="bar" style="width:${w1}%;background:var(--bar1)">${f(net)}</div>
+<div>صافي المعاش التقاعدي: <b>${f(rn)}</b></div><div class="bar" style="width:${w2}%;background:var(--bar2)">${f(rn)}</div>
+<div class="res tot"><span>الفارق الشهري</span><b>${diff>0?"انخفاض":"زيادة"} ${f(Math.abs(diff))} (${Math.abs(dp).toFixed(1)}٪)</b></div>`;
+}
+const L=[...document.querySelectorAll("nav a")];
+L.forEach(a=>a.addEventListener("click",e=>{e.preventDefault();const t=document.querySelector(a.getAttribute("href"));if(t)t.scrollIntoView({behavior:"smooth",block:"start"})}));
+try{const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){L.forEach(a=>{const on=a.getAttribute("href")==="#"+e.target.id;a.classList.toggle("on",on);if(on)a.scrollIntoView({block:"nearest",inline:"center"})})}}),{rootMargin:"-25% 0px -65% 0px"});document.querySelectorAll("main section").forEach(s=>io.observe(s))}catch(e){}
+$("rank").onchange=setBase;$("grade").onchange=setBase;
+document.querySelectorAll("input,select").forEach(e=>{if(!["rank","grade"].includes(e.id))e.addEventListener("input",calc)});
+$("theme").onclick=()=>{const r=document.documentElement,d=r.dataset.theme==="dark"||(!r.dataset.theme&&matchMedia("(prefers-color-scheme:dark)").matches);r.dataset.theme=d?"light":"dark"};
+setBase();
+</script>
+</body>
+</html>
