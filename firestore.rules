@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // الجميع يقرأ التوفر، والمشرف وحده يكتب (ضع UID حسابك مكان YOUR_ADMIN_UID)
+    match /settings/availability {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == "YOUR_ADMIN_UID";
+    }
+  }
+}
